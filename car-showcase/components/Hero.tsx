@@ -9,9 +9,9 @@ function Hero() {
   };
 
   return (
-    <div className="relative z-0 max-w-[1440px] mx-auto flex flex-col xl:flex-row items-center justify-between gap-10 px-6 sm:px-16 py-14">
+    <div className="relative z-0 max-w-[1440px] mx-auto flex flex-col xl:flex-row items-center xl:items-start justify-between gap-10 px-6 sm:px-16 py-14">
       {/* Left Text Section */}
-      <div className="flex-1 text-left">
+      <div className="flex-1 text-left xl:pt-20">
         <h1 className="2xl:text-[72px] sm:text-[64px] text-[50px] font-extrabold leading-tight text-gray-900">
           Find, book or rent a car <br className="hidden sm:block" /> quickly
           and easily
@@ -31,19 +31,18 @@ function Hero() {
       </div>
 
       {/* Right Image Section */}
-      <div className="relative flex-1 w-full xl:h-[600px] h-[400px] flex justify-center items-center">
+      <div className="relative flex-1 w-full xl:h-[600px] h-[400px] flex justify-center items-end overflow-hidden">
         {/* Background Image Layer */}
         <div
-          className="absolute inset-0 -z-10 rounded-3xl overflow-hidden shadow-lg"
+          className="absolute inset-0 -z-10 rounded-full"
           style={{
             backgroundImage: "url('/hero-bg.png')",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "end",
+            backgroundPosition: "center", // Keeps the center alignment
             opacity: 1,
             borderRadius: "1.5rem",
-            transform: "scale(1.2)",
-            top: "10%",
+            transform: "scale(1.2) translateX(50%)",
           }}
         />
 
@@ -52,7 +51,7 @@ function Hero() {
           src="/hero.png"
           alt="hero"
           fill
-          className="object-contain z-20 transform -translate-x-16 xl:translate-x-0"
+          className="object-contain z-20 transform -translate-x-8 xl:translate-x-0 translate-y-6"
           priority
         />
       </div>
