@@ -22,7 +22,11 @@ function Hero() {
         </p>
 
         <div className="mt-10">
-          <CustomButton title="Explore Cars" handleClick={handleScroll} />
+          <CustomButton
+            title="Explore Cars"
+            handleClick={handleScroll}
+            containerStyles="bg-blue-600 text-white mt-10 rounded-full py-4 px-8 hover:bg-blue-700 transition duration-300 ease-in-out"
+          />
         </div>
       </div>
 
@@ -35,18 +39,20 @@ function Hero() {
             backgroundImage: "url('/hero-bg.png')",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            opacity: 0.15,
+            backgroundPosition: "end",
+            opacity: 1,
             borderRadius: "1.5rem",
+            transform: "scale(1.2)",
+            top: "10%",
           }}
         />
 
-        {/* Foreground Hero Image */}
+        {/* Foreground Hero Image (Car Image) */}
         <Image
           src="/hero.png"
           alt="hero"
           fill
-          className="object-contain z-10"
+          className="object-contain z-20 transform -translate-x-16 xl:translate-x-0"
           priority
         />
       </div>
