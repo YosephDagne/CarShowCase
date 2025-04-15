@@ -23,6 +23,7 @@ export default async function Home() {
           </div>
         </div>
 
+        {/* Display cars if data is not empty */}
         {!isDataEmpty ? (
           <section className="pt-14">
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8">
@@ -32,6 +33,7 @@ export default async function Home() {
             </div>
           </section>
         ) : (
+          // Show "No results" message if data is empty
           <div className="mt-16 flex justify-center items-center flex-col gap-2">
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
             <p>{allCars?.message}</p>
