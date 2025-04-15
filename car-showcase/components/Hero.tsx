@@ -9,7 +9,7 @@ const Hero = () => {
   };
 
   return (
-    <section className="relative z-0 w-full max-w-[1440px] mx-auto px-6 sm:px-16 py-20 flex flex-col-2   xl:flex-row items-center justify-between gap-14">
+    <section className="relative z-0 w-full max-w-[1440px] mx-auto px-6 sm:px-16 py-20 flex flex-col-2 xl:flex-row items-center justify-between gap-14">
       {/* Left Section */}
       <div className="flex-1 xl:pt-24 text-left space-y-6 sm:space-y-8 xl:space-y-10">
         <h1 className="text-[40px] sm:text-[60px] 2xl:text-[72px] font-extrabold leading-tight text-gray-700">
@@ -40,7 +40,7 @@ const Hero = () => {
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
             transform: "translateX(30%)",
-            borderRadius:"20px"
+            borderRadius: "20px"
           }}
         />
 
