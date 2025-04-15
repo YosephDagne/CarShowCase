@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import CustomButton from "./CustomButton";
 
 const NavBar = () => {
   return (
@@ -16,10 +17,10 @@ const NavBar = () => {
           />
         </Link>
 
-        {/* Placeholder for future nav items */}
-        <div className="hidden sm:flex gap-6">
-          {/* Add nav links or buttons here if needed */}
-        </div>
+        <CustomButton title="Sign In"
+          btnType="button"
+          containerStyles="text-primary-blue rounded-full bg-white min-w-[130px]"
+        />
       </nav>
     </header>
   );
