@@ -10,9 +10,9 @@ const Hero = () => {
 
   return (
     <section className="relative z-0 w-full max-w-[1440px] mx-auto px-6 sm:px-16 py-20 flex flex-col xl:flex-row items-center justify-between gap-14">
-      {/* Left Section: Text & Button */}
+      {/* Left Section */}
       <div className="flex-1 xl:pt-24 text-left space-y-6 sm:space-y-8 xl:space-y-10">
-        <h1 className="text-[40px] sm:text-[60px] 2xl:text-[72px] font-extrabold leading-tight text-gray-900">
+        <h1 className="text-[40px] sm:text-[60px] 2xl:text-[72px] font-extrabold leading-tight text-gray-700">
           Find, book or rent a car <br className="hidden sm:inline" />
           quickly and easily
         </h1>
@@ -25,32 +25,32 @@ const Hero = () => {
         <CustomButton
           title="Explore Cars"
           handleClick={handleScroll}
-          containerStyles="bg-blue-600 text-white rounded-full py-4 px-8 hover:bg-blue-700 transition duration-300 ease-in-out"
+          containerStyles="bg-blue-600 text-white rounded-full py-3 px-3 hover:bg-gray-200 transition duration-300 ease-in-out hover:text-black border-[1px] border-black"
         />
       </div>
 
-      {/* Right Section: Image */}
-      <div className="relative flex-1 w-full h-[400px] xl:h-[600px] flex justify-center items-end overflow-hidden">
-        {/* Background Shape/Image */}
+      {/* Right Section */}
+      <div className="relative flex-1 w-full flex justify-center items-end min-h-[300px] sm:min-h-[400px] xl:min-h-[500px]">
+        {/* Background Shape */}
         <div
-          className="absolute inset-0 -z-10 rounded-full"
+          className="absolute xl:top-[-120px] top-[-12px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10 rounded-full xl:rounded-none"
           style={{
             backgroundImage: "url('/hero-bg.png')",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            transform: "scale(1.2) translateX(50%)",
-            borderRadius: "1.5rem",
+            transform: "translateX(10%)",
           }}
         />
 
-        {/* Foreground Hero Image */}
+        {/* Hero Image */}
         <Image
           src="/hero.png"
           alt="Car Rental Hero"
-          fill
+          width={500}
+          height={500}
+          className="w-auto h-[250px] sm:h-[400px] xl:h-[500px] object-contain z-10 animate-slide-in"
           priority
-          className="object-contain z-10 translate-y-6 xl:translate-y-0 -translate-x-8 xl:translate-x-0"
         />
       </div>
     </section>

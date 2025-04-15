@@ -2,77 +2,19 @@
 @import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
 @import "tailwindcss";
 
-/* Global Reset */
-/* 
-*::before,
-*::after { {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-/* Global Font */
-/* body {
-  font-family: "Manrope", sans-serif;
-  background-color: #f9fafb;
-  color: #333;
-  line-height: 1.6;
-} */
 
-/* Heading and Paragraph Styles */
-/* h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: "Outfit", sans-serif;
-  font-weight: 700;
-} */
-
-/* h1 {
-  font-size: 2.5rem;
-}
-
-p {
-  font-size: 1rem;
-  font-weight: 400;
-  color: #555;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-} */
-
-/* Container Styles */
-/* .containerStyles {
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 1.5rem;
-  width: 100%;
-} */
-
-/* @media (max-width: 1024px) {
-  .containerStyles {
-    padding: 0 1rem;
+@keyframes slideIn {
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
   }
-} */
-
-/* Custom Button Styles */
-/* button {
-  background-color: #1da1f2;
-  color: white;
-  padding: 12px 20px;
-  border-radius: 50px;
-  font-weight: 600;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-} */
-
-/* button:hover {
-  background-color: #1796d4;
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-button:disabled {
-  background-color: #b0d5ea;
-  cursor: not-allowed;
-} */ 
+.animate-slide-in {
+  animation: slideIn 1s ease-out;
+}

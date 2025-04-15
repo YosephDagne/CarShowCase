@@ -2,20 +2,24 @@
 import { CustomButtonProps } from "@/types";
 import Image from "next/image";
 
-function CustomButton({
+const CustomButton = ({
   title,
   handleClick,
   containerStyles,
-}: CustomButtonProps) {
+  btnType = "button",
+}: // disabled = false,
+
+CustomButtonProps) => {
   return (
     <button
-      type="button"
+      type={btnType}
       onClick={handleClick}
-      className={`flex items-center justify-center px-6 py-3 font-semibold transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer ${containerStyles}`}
+      disabled={false}
+      className={`flex items-center justify-center px-4 py-2 font-semibold transition duration-300 ease-in-out disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer ${containerStyles}`}
     >
       <span className="text-center">{title}</span>
     </button>
   );
-}
+};
 
 export default CustomButton;
