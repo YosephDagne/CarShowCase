@@ -1,9 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 const CustomFilter = () => {
   return (
-    <div>CustomFilter</div>
-  )
-}
+    <div className="custom-filter">
+      <h2>CustomFilter</h2>
+    </div>
+  );
+};
 
-export default CustomFilter
+export default CustomFilter;
