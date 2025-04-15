@@ -3,13 +3,16 @@
 import { useState, Fragment } from 'react';
 import Image from 'next/image';
 import{Combobox, Transition} from '@headlessui/react'
-
+import { manufacturers } from '@/constants';
 import { SearchManufactureProps } from '@/types'
 import React from 'react'
 
 
 const SearchManufacture = ({manufacture, setManufacture}:SearchManufactureProps) => {
-    const [query, setQuery]= useState('')
+    const [query, setQuery]= useState('');
+    const filteredManufacturers = 
+    query === ""? manufacturers:manufactures.filter
+    
   return (
     <div className='search-manufacture'>
         <Combobox>
@@ -35,8 +38,10 @@ const SearchManufacture = ({manufacture, setManufacture}:SearchManufactureProps)
           <Transition
             as={Fragment}
             Leave= "transition ease-in duration-100"
-            LeaveFrom >
-
+            LeaveFrom="opacity-100"
+            LeaveTo="opacity-0"
+            afterLeave={()=> setQuery('')}>
+            <Combobox.Options></Combobox.Options>
           </Transition>
 
             </div>
