@@ -7,3 +7,7 @@ export interface CustomButtonProps {
   containerStyles?: string;
   btnType?: "button" | "submit" | "reset";
 }
+export interface SearchManufactureProps{
+    manufacture: string;
+    setManufacture:(manufacture: string)=>void;
+}

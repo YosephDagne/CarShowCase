@@ -33,13 +33,14 @@ const Hero = () => {
       <div className="relative flex-1 w-full flex justify-center items-end min-h-[300px] sm:min-h-[400px] xl:min-h-[500px]">
         {/* Background Shape */}
         <div
-          className="absolute xl:top-[-120px] top-[-12px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10 rounded-full xl:rounded-none"
+          className="absolute xl:top-[-200px] top-[-60px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10  xl:rounded-none"
           style={{
             backgroundImage: "url('/hero-bg.png')",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            transform: "translateX(10%)",
+            transform: "translateX(30%)",
+            borderRadius: "20px"
           }}
         />
 
