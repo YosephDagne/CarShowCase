@@ -25,7 +25,7 @@ const Hero = () => {
         <CustomButton
           title="Explore Cars"
           handleClick={handleScroll}
-          containerStyles="bg-blue-600 text-white rounded-full py-3 px-3 hover:bg-blue-700 transition duration-300 ease-in-out"
+          containerStyles="bg-blue-600 text-white rounded-full py-3 px-3 hover:bg-gray-200 transition duration-300 ease-in-out hover:text-black border-[1px] border-black"
         />
       </div>
 
@@ -33,14 +33,13 @@ const Hero = () => {
       <div className="relative flex-1 w-full flex justify-center items-end min-h-[300px] sm:min-h-[400px] xl:min-h-[500px]">
         {/* Background Shape */}
         <div
-          className="absolute bottom-0 w-[150%] h-[120%] sm:w-full sm:h-full -z-10 rounded-full"
+          className="absolute xl:top-[-120px] top-[-12px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10 rounded-full xl:rounded-none"
           style={{
             backgroundImage: "url('/hero-bg.png')",
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            transform: "translateX(30%)",
-            borderRadius: "50px",
+            transform: "translateX(10%)",
           }}
         />
 
