@@ -11,8 +11,13 @@ import React from 'react'
 const SearchManufacture = ({manufacture, setManufacture}:SearchManufactureProps) => {
     const [query, setQuery]= useState('');
     const filteredManufacturers = 
-    query === ""? manufacturers:manufactures.filter
-    
+    query === ""
+    ? manufacturers
+    :manufactures.filter
+    ((item)=>(
+
+    )
+    )
   return (
     <div className='search-manufacture'>
         <Combobox>
