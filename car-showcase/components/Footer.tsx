@@ -51,7 +51,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="order-2 md:order-1 text-center md:text-left">
             <p className="text-sm text-gray-600">
-              © {new Date().getFullYear()} Carhub. All rights reserved.
+              &copy; {new Date().getFullYear()} Carhub. All rights reserved.
             </p>
           </div>
           <div className="order-1 md:order-2 flex gap-6">
