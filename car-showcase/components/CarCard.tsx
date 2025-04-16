@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
-import CarDetails from './CarDetails';
+"use client";
+
+import React, { useState } from "react";
+import CarDetails from "./CarDetails";
 
 type CarCardProps = {
   car: {
@@ -15,8 +17,11 @@ type CarCardProps = {
     // Add any other properties you need
   };
 };
-const [isOpen, setIsOpen]=useState(false);  
+
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
+  // ✅ useState must be inside the component
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="car-card border p-4 rounded shadow">
       <h2 className="text-xl font-bold mb-2">{car.make} {car.model}</h2>
@@ -28,11 +33,15 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <p>Displacement: {car.displacement}L</p>
       <p>Class: {car.class}</p>
 
+      {/* Trigger to open modal */}
+      <button
+        onClick={() => setIsOpen(true)}
+        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+      >
+        View Details
+      </button>
 
-
-      <CarDetails isOpen={isOpen} closeModal={()=>
-        setIsOpen(false)} car={car}/>
-      
+      <CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />
     </div>
   );
 };
