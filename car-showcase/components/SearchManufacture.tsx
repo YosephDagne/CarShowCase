@@ -1,20 +1,26 @@
-'use client';
+"use client";
 
-import { useState, Fragment } from 'react';
-import Image from 'next/image';
-import { Combobox, Transition } from '@headlessui/react';
-import { manufacturers } from '@/constants';
-import { SearchManufactureProps } from '@/types';
+import { useState, Fragment } from "react";
+import Image from "next/image";
+import { Combobox, Transition } from "@headlessui/react";
+import { manufacturers } from "@/constants";
+import { SearchManufactureProps } from "@/types";
 
-const SearchManufacture = ({ manufacture, setManufacture }: SearchManufactureProps) => {
-  const [query, setQuery] = useState('');
+const SearchManufacture = ({
+  manufacture,
+  setManufacture,
+}: SearchManufactureProps) => {
+  const [query, setQuery] = useState("");
   const [showInput, setShowInput] = useState(false);
 
   const filteredManufacturers =
-    query === ''
+    query === ""
       ? manufacturers
       : manufacturers.filter((item) =>
-          item.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
+          item
+            .toLowerCase()
+            .replace(/\s+/g, "")
+            .includes(query.toLowerCase().replace(/\s+/g, ""))
         );
 
   return (
@@ -44,11 +50,14 @@ const SearchManufacture = ({ manufacture, setManufacture }: SearchManufacturePro
               leave="transition ease-in duration-100"
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
-              afterLeave={() => setQuery('')}
+              afterLeave={() => setQuery("")}
             >
               <Combobox.Options className="absolute z-10 mt-1 w-full bg-white shadow-lg max-h-60 overflow-auto rounded-md py-1 text-base ring-1 ring-black ring-opacity-5 focus:outline-none">
-                {filteredManufacturers.length === 0 && query !== '' ? (
-                  <Combobox.Option value={query} className="px-4 py-2 cursor-pointer hover:bg-gray-100">
+                {filteredManufacturers.length === 0 && query !== "" ? (
+                  <Combobox.Option
+                    value={query}
+                    className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                  >
                     Create "{query}"
                   </Combobox.Option>
                 ) : (
@@ -58,7 +67,7 @@ const SearchManufacture = ({ manufacture, setManufacture }: SearchManufacturePro
                       value={item}
                       className={({ active }) =>
                         `px-4 py-2 cursor-pointer ${
-                          active ? 'bg-blue-600 text-white' : 'text-gray-900'
+                          active ? "bg-blue-600 text-white" : "text-gray-900"
                         }`
                       }
                     >
