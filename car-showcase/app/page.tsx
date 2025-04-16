@@ -30,8 +30,8 @@ export default async function Home() {
         {!isDataEmpty ? (
           <section className="pt-14">
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8">
-              {allCars.map((car) => (
-                <CarCard key={car.id} car={car} />
+              {allCars.map((car, index) => (
+                <CarCard key={`${car.make}-${car.model}-${index}`} car={car} />
               ))}
             </div>
           </section>
