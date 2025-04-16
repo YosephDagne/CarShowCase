@@ -14,17 +14,24 @@ type CarCardProps = {
     cylinders: number;
     displacement: number;
     class: string;
-    // Add any other properties you need
   };
 };
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  // ✅ useState must be inside the component
+  // State to handle whether the modal is open or closed
   const [isOpen, setIsOpen] = useState(false);
+
+  // Function to open the modal
+  const handleOpenModal = () => setIsOpen(true);
+
+  // Function to close the modal
+  const handleCloseModal = () => setIsOpen(false);
 
   return (
     <div className="car-card border p-4 rounded shadow">
-      <h2 className="text-xl font-bold mb-2">{car.make} {car.model}</h2>
+      <h2 className="text-xl font-bold mb-2">
+        {car.make} {car.model}
+      </h2>
       <p>Year: {car.year}</p>
       <p>Fuel Type: {car.fuel_type}</p>
       <p>Transmission: {car.transmission}</p>
@@ -33,15 +40,16 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <p>Displacement: {car.displacement}L</p>
       <p>Class: {car.class}</p>
 
-      {/* Trigger to open modal */}
+      {/* Button to open the modal */}
       <button
-        onClick={() => setIsOpen(true)}
-        className="mt-4 bg-blue-500 text-white px-4 py-2 rounded"
+        onClick={handleOpenModal}
+        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
       >
         View Details
       </button>
 
-      <CarDetails isOpen={isOpen} closeModal={() => setIsOpen(false)} car={car} />
+      {/* CarDetails component with isOpen state */}
+      <CarDetails isOpen={isOpen} closeModal={handleCloseModal} car={car} />
     </div>
   );
 };
