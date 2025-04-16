@@ -39,7 +39,7 @@ const Hero = () => {
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",
-            transform: "translateX(30%)",
+            transform: "translateX(15%)",
             borderRadius: "20px"
           }}
         />
