@@ -8,7 +8,7 @@ export async function fetchCars() {
     const response = await fetch(
       "https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla",
       {
-        // method: "GET",
+        method: "GET",
         headers: headers,
       }
     );
@@ -24,4 +24,19 @@ export async function fetchCars() {
     console.error("Failed to fetch cars:", error);
     return null;
   }
+}
+
+export function calculateCarRent(city_mpg: number, year: number) {
+  const basePricePerDay = 50; // Base price per day in USD
+  const mileageFactor = 0.1; // Factor for city_mpg
+  const ageFactor = 0.05; // Factor for car age
+
+  // Calculate additional rate based on mileage and age
+  const mileageRate = city_mpg * mileageFactor;
+  const carAge = (new Date().getFullYear() - year) * ageFactor;
+
+  // Calculate total rent per day
+  const totalRentPerDay = basePricePerDay + mileageRate + carAge;
+
+  return totalRentPerDay.toFixed(0); // Return as a string
 }
