@@ -1,9 +1,8 @@
 import { Fragment } from "react";
 import Image from "next/image";
-
 import { Dialog, Transition } from "@headlessui/react";
 import { CarProps } from "@/types";
-
+import { generateCarImageUrl } from "@/utils";
 
 interface CarDetailsProps {
   isOpen: boolean;
@@ -12,7 +11,7 @@ interface CarDetailsProps {
 }
 
 const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
-  <>
+  <> 
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
@@ -53,8 +52,8 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
                   />
                 </button>
 
-                {/* <div className="flex-1 flex flex-col gap-3"> */}
-                  {/* <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
+                <div className="flex-1 flex flex-col gap-3">
+                  <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
                     <Image
                       src={generateCarImageUrl(car)}
                       alt="car model"
@@ -62,22 +61,13 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
                       priority
                       className="object-contain"
                     />
-                  </div> */}
+                  </div>
 
-                  {/* <div className="flex gap-3">
+                  <div className="flex gap-3">
                     <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                       <Image
-                        src={generateCarImageUrl(car, "29")}
-                        alt="car model"
-                        fill
-                        priority
-                        className="object-contain"
-                      />
-                    </div> */}
-                    {/* <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
-                      <Image
-                        src={generateCarImageUrl(car, "33")}
-                        alt="car model"
+                        src={generateCarImageUrl(car, "front")}
+                        alt="car front"
                         fill
                         priority
                         className="object-contain"
@@ -85,15 +75,24 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
                     </div>
                     <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
                       <Image
-                        src={generateCarImageUrl(car, "13")}
-                        alt="car model"
+                        src={generateCarImageUrl(car, "back")}
+                        alt="car back"
+                        fill
+                        priority
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <Image
+                        src={generateCarImageUrl(car, "side")}
+                        alt="car side"
                         fill
                         priority
                         className="object-contain"
                       />
                     </div>
                   </div>
-                </div> */}
+                </div>
 
                 <div className="flex-1 flex flex-col gap-2">
                   <h2 className="font-semibold text-xl capitalize">
@@ -104,12 +103,16 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
                     {Object.entries(car).map(([key, value]) => (
                       <div
                         className="flex justify-between gap-5 w-full text-right"
-                        key={key}
+                        key={`${key}-${value}`}
                       >
                         <h4 className="text-grey capitalize">
                           {key.split("_").join(" ")}
                         </h4>
-                        <p className="text-black-100 font-semibold">{value}</p>
+                        <p className="text-black-100 font-semibold">
+                          {typeof value === "object"
+                            ? JSON.stringify(value)
+                            : value}
+                        </p>
                       </div>
                     ))}
                   </div>

@@ -1,32 +1,54 @@
 import { Hero, CarCard, SearchBar, CustomFilter } from "@/components";
 import { fetchCars } from "@/utils";
+import { fuels, yearsOfProduction } from "@/constants";
 
-export default async function Home() {
-  // Fetch car data
-  const allCars = await fetchCars();
+interface PageProps {
+  searchParams: Promise<{
+    manufacturer?: string;
+    year?: number;
+    fuel?: string;
+    limit?: number;
+    model?: string;
+  }>;
+}
 
-  // Check if data is empty or invalid
-  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
+export default async function Home({ searchParams }: PageProps) {
+  // Await the searchParams as required by Next.js 15+
+  const resolvedSearchParams = await searchParams;
+
+  const manufacturer = resolvedSearchParams.manufacturer || "";
+  const year = resolvedSearchParams.year ?? 2022;
+  const fuel = resolvedSearchParams.fuel || "";
+  const limit = resolvedSearchParams.limit ?? 10;
+  const model = resolvedSearchParams.model || "";
+
+  const allCars = await fetchCars({
+    manufacturer,
+    year,
+    fuel,
+    limit,
+    model,
+  });
+
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1;
 
   return (
     <main className="overflow-hidden">
       <Hero />
-
       <div className="mt-12 padding-x padding-y max-width ml-10" id="discover">
         <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
           <p>Explore the cars you might like</p>
         </div>
 
-        <div className=" mt-12 w-full flex-between items-center flex-wrap gap-5">
+        <div className="mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar />
           <div className="flex justify-start flex-wrap items-center gap-2 mt-6">
-            <CustomFilter />
-            <CustomFilter />
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
 
-        {/* Display cars if data is not empty */}
         {!isDataEmpty ? (
           <section className="pt-14">
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8">
@@ -36,7 +58,6 @@ export default async function Home() {
             </div>
           </section>
         ) : (
-          // Show "No results" message if data is empty
           <div className="mt-16 flex justify-center items-center flex-col gap-2">
             <h2 className="text-black text-xl font-bold">Oops, no results</h2>
             <p className="text-sm text-gray-600">
