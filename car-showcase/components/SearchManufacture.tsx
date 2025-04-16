@@ -24,12 +24,12 @@ const SearchManufacture = ({
         );
 
   return (
-    <div className="relative flex items-center gap-4">
+    <div className="relative flex items-center gap-4 w-full">
       {/* Toggle Button */}
       <button
         type="button"
         onClick={() => setShowInput((prev) => !prev)}
-        className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
+        className="flex items-center justify-center w-11 h-11 rounded-full bg-gray-100 hover:bg-gray-200 transition"
         aria-label={
           showInput ? "Close manufacturer search" : "Open manufacturer search"
         }
@@ -38,22 +38,21 @@ const SearchManufacture = ({
           src="/search.png"
           width={24}
           height={24}
-          alt="Car manufacturer logo"
-          className="object-contain cursor-pointer"
+          alt="Search icon"
+          className="object-contain"
         />
       </button>
 
       {/* Combobox */}
       {showInput && (
         <Combobox value={manufacture} onChange={setManufacture}>
-          <div className="relative w-64">
+          <div className="relative w-full">
             <Combobox.Input
-              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              className="w-full px-4 py-2 text-sm border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               displayValue={(manufacturer: string) => manufacturer}
               onChange={(e) => setQuery(e.target.value)}
               autoFocus
               placeholder="Search manufacturer..."
-              aria-label="Search manufacturers"
             />
 
             <Transition
@@ -66,13 +65,13 @@ const SearchManufacture = ({
               leaveTo="opacity-0"
               afterLeave={() => setQuery("")}
             >
-              <Combobox.Options className="absolute z-10 mt-2 w-full bg-white rounded-lg shadow-lg max-h-60 overflow-auto ring-1 ring-black ring-opacity-5 focus:outline-none text-sm scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+              <Combobox.Options className="absolute z-10 mt-2 w-full bg-white rounded-md shadow-lg max-h-60 overflow-auto ring-1 ring-black ring-opacity-5 focus:outline-none text-sm scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
                 {filteredManufacturers.length === 0 && query !== "" ? (
                   <Combobox.Option
                     value={query}
                     className="px-4 py-2 text-gray-700 cursor-pointer hover:bg-gray-100"
                   >
-                    No results, use "{query}"
+                    No results found for "{query}"
                   </Combobox.Option>
                 ) : (
                   filteredManufacturers.map((item) => (
@@ -80,7 +79,7 @@ const SearchManufacture = ({
                       key={item}
                       value={item}
                       className={({ active, selected }) =>
-                        `px-4 py-2 cursor-pointer transition-colors ${
+                        `px-4 py-2 cursor-pointer ${
                           active
                             ? "bg-blue-500 text-white"
                             : selected
