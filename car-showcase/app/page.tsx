@@ -13,14 +13,14 @@ export default async function Home() {
       <Hero />
 
       <div className="mt-12 padding-x padding-y max-width ml-10" id="discover">
-        <div className="home__text-container">
+        <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
           <p>Explore the cars you might like</p>
         </div>
 
-        <div className="home__filters">
+        <div className=" mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar />
-          <div className="home__filter-container mt-6">
+          <div className="flex justify-start flex-wrap items-center gap-2 mt-6">
             <CustomFilter />
             <CustomFilter />
           </div>
