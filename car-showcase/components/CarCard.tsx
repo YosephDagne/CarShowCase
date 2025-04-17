@@ -37,8 +37,20 @@ const CarCard = ({ car }: CarCardProps) => {
         </span>
       </p>
 
+      {/* Image section with hover zoom effect */}
+      <div className="relative w-full h-40 my-3 object-contain">
+        <Image
+          src="/hero.png"
+          alt="hero"
+          width={300}
+          height={300}
+          className=""
+        />
+      </div>
+
       <div className="relative flex w-full mt-2">
-        <div className="flex group-hover:invisible w-full justify-between text-grey">
+        <div className="flex group-hover:invisible w-full justify-between text-grey space-x-4">
+          {/* Steering Wheel */}
           <div className="flex flex-col justify-center items-center gap-2">
             <Image
               src="/steering-wheel.svg"
@@ -50,14 +62,18 @@ const CarCard = ({ car }: CarCardProps) => {
               {transmission === "a" ? "Automatic" : "Manual"}
             </p>
           </div>
+
+          {/* Drive Type */}
           <div className="flex flex-col justify-center items-center gap-2">
-            <Image src="/tire.svg" width={20} height={20} alt="seat" />
+            <Image src="/tire.svg" width={20} height={20} alt="drive type" />
             <p className="text-[14px] leading-[17px] text-gray-600">
               {drive.toUpperCase()}
             </p>
           </div>
+
+          {/* MPG */}
           <div className="flex flex-col justify-center items-center gap-2">
-            <Image src="/gas.svg" width={20} height={20} alt="seat" />
+            <Image src="/gas.svg" width={20} height={20} alt="fuel" />
             <p className="text-[14px] leading-[17px] text-gray-600">
               {city_mpg} MPG
             </p>
