@@ -1,20 +1,9 @@
-"use client";
-
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import Image from "next/image";
-import { Dialog, Transition } from "@headlessui/react";
 
-type CarProps = {
-  make: string;
-  model: string;
-  year: number;
-  fuel_type: string;
-  transmission: string;
-  drive: string;
-  cylinders: number;
-  displacement: number;
-  class: string;
-};
+import { Dialog, Transition } from "@headlessui/react";
+import { CarProps } from "@/types";
+//import { generateCarImageUrl } from "@/utils";
 
 interface CarDetailsProps {
   isOpen: boolean;
@@ -22,8 +11,8 @@ interface CarDetailsProps {
   car: CarProps;
 }
 
-const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
-  return (
+const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => (
+  <>
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>
         <Transition.Child
@@ -45,15 +34,14 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
+              leave="ease-out duration-300"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex flex-col">
-                {/* Close Button */}
+              <Dialog.Panel className="relative w-full max-w-lg max-h-[90vh] overflow-y-auto transform rounded-2xl bg-white p-6 text-left shadow-xl transition-all flex flex-col gap-5">
                 <button
                   type="button"
-                  className="absolute top-2 right-2 z-10 w-fit p-2 bg-primary-blue-100 rounded-full"
+                  className="absolute top-2 right-2 z-10 w-fit p-2 bg-blue-100 rounded-full"
                   onClick={closeModal}
                 >
                   <Image
@@ -65,37 +53,48 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                   />
                 </button>
 
-                {/* Image Section */}
-                <div className="flex-1 flex flex-col gap-3">
-                  <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
+                {/* <div className="flex-1 flex flex-col gap-3"> */}
+                  {/* <div className="relative w-full h-40 bg-pattern bg-cover bg-center rounded-lg">
                     <Image
-                      src="/hero.png"
+                      src={generateCarImageUrl(car)}
                       alt="car model"
                       fill
                       priority
                       className="object-contain"
                     />
-                  </div>
+                  </div> */}
 
-                  <div className="flex gap-3">
-                    {[1, 2, 3].map((_, index) => (
-                      <div
-                        key={index}
-                        className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg"
-                      >
-                        <Image
-                          src="/hero.png"
-                          alt={`car model thumbnail ${index + 1}`}
-                          fill
-                          priority
-                          className="object-contain"
-                        />
-                      </div>
-                    ))}
+                  {/* <div className="flex gap-3">
+                    <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <Image
+                        src={generateCarImageUrl(car, "29")}
+                        alt="car model"
+                        fill
+                        priority
+                        className="object-contain"
+                      />
+                    </div> */}
+                    {/* <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <Image
+                        src={generateCarImageUrl(car, "33")}
+                        alt="car model"
+                        fill
+                        priority
+                        className="object-contain"
+                      />
+                    </div>
+                    <div className="flex-1 relative w-full h-24 bg-primary-blue-100 rounded-lg">
+                      <Image
+                        src={generateCarImageUrl(car, "13")}
+                        alt="car model"
+                        fill
+                        priority
+                        className="object-contain"
+                      />
+                    </div>
                   </div>
-                </div>
+                </div> */}
 
-                {/* Car Details */}
                 <div className="flex-1 flex flex-col gap-2">
                   <h2 className="font-semibold text-xl capitalize">
                     {car.make} {car.model}
@@ -110,11 +109,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
                         <h4 className="text-grey capitalize">
                           {key.split("_").join(" ")}
                         </h4>
-                        <p className="text-black-100 font-semibold">
-                          {typeof value === "object"
-                            ? JSON.stringify(value)
-                            : String(value)}
-                        </p>
+                        <p className="text-black-100 font-semibold">{value}</p>
                       </div>
                     ))}
                   </div>
@@ -125,7 +120,7 @@ const CarDetails = ({ isOpen, closeModal, car }: CarDetailsProps) => {
         </div>
       </Dialog>
     </Transition>
-  );
-};
+  </>
+);
 
 export default CarDetails;
