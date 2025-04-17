@@ -13,14 +13,14 @@ export default async function Home() {
       <Hero />
 
       <div className="mt-12 padding-x padding-y max-width ml-10" id="discover">
-        <div className="home__text-container">
+        <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
           <p>Explore the cars you might like</p>
         </div>
 
-        <div className="home__filters">
+        <div className=" mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar />
-          <div className="home__filter-container mt-6">
+          <div className="flex justify-start flex-wrap items-center gap-2 mt-6">
             <CustomFilter />
             <CustomFilter />
           </div>
@@ -30,8 +30,8 @@ export default async function Home() {
         {!isDataEmpty ? (
           <section className="pt-14">
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8">
-              {allCars.map((car) => (
-                <CarCard key={car.id} car={car} />
+              {allCars.map((car, index) => (
+                <CarCard key={`${car.make}-${car.model}-${index}`} car={car} />
               ))}
             </div>
           </section>
