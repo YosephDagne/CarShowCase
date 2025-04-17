@@ -18,13 +18,12 @@ type CarCardProps = {
 };
 
 const CarCard: React.FC<CarCardProps> = ({ car }) => {
-  // State to handle whether the modal is open or closed
+ 
   const [isOpen, setIsOpen] = useState(false);
 
-  // Function to open the modal
   const handleOpenModal = () => setIsOpen(true);
 
-  // Function to close the modal
+  
   const handleCloseModal = () => setIsOpen(false);
 
   return (
@@ -40,7 +39,7 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
       <p>Displacement: {car.displacement}L</p>
       <p>Class: {car.class}</p>
 
-      {/* Button to open the modal */}
+   
       <button
         onClick={handleOpenModal}
         className="mt-2 px-4 py-2 bg-blue-500 text-white rounded"
@@ -48,7 +47,6 @@ const CarCard: React.FC<CarCardProps> = ({ car }) => {
         View Details
       </button>
 
-      {/* CarDetails component with isOpen state */}
       <CarDetails isOpen={isOpen} closeModal={handleCloseModal} car={car} />
     </div>
   );
