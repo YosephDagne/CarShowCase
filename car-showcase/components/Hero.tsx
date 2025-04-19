@@ -30,10 +30,10 @@ const Hero = () => {
       </div>
 
       {/* Right Section */}
-      <div className="relative flex-1 w-full flex justify-center items-end min-h-[300px] sm:min-h-[400px] xl:min-h-[500px]">
+      <div className="relative flex-1 w-full flex justify-center items-end min-h-[300px] sm:min-h-[4 00px] xl:min-h-[500px]">
         {/* Background Shape */}
         <div
-          className="absolute xl:top-[-200px] top-[-60px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10  xl:rounded-none"
+          className="absolute xl:top-[-200px] top-[-80px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10  xl:rounded-none"
           style={{
             backgroundImage: "url('/hero-bg.png')",
             backgroundSize: "cover",
