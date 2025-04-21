@@ -1,95 +1,94 @@
 "use client";
 
-import React, { useState } from "react";
-import SearchManufacture from "./SearchManufacture";
 import Image from "next/image";
-import { useRouter } from "next/navigation"; 
-
-const SearchButton = ({ otherClasses }: { otherClasses: string }) => (
-  <button type="submit" className={`-ml-3 z-10 ${otherClasses}`}>
-    <Image
-      src="/magnifying-glass.svg"
-      alt="magnifying glass"
-      width={40}
-      height={40}
-      className="object-contain"
-    />
-  </button>
-);
+import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import SearchManufacture from "./SearchManufacture";
 
 const SearchBar = () => {
-  const [manufacture, setManufacture] = useState("");
+  const [manufacturer, setManufacturer] = useState("");
   const [model, setModel] = useState("");
   const router = useRouter();
 
-  const updateSearchParams = (model: string, manufacture: string) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (manufacturer.trim() === "" && model.trim() === "") {
+      return alert("Please provide some input");
+    }
+
+    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
+  };
+
+  const updateSearchParams = (model: string, manufacturer: string) => {
     const searchParams = new URLSearchParams(window.location.search);
 
-    if (model) {
-      searchParams.set("model", model);
-    } else {
-      searchParams.delete("model");
-    }
-
-    if (manufacture) {
-      searchParams.set("manufacture", manufacture);
-    } else {
-      searchParams.delete("manufacture");
-    }
+    model ? searchParams.set("model", model) : searchParams.delete("model");
+    manufacturer
+      ? searchParams.set("manufacturer", manufacturer)
+      : searchParams.delete("manufacturer");
 
     const newPathname = `${
       window.location.pathname
     }?${searchParams.toString()}`;
-
     router.push(newPathname);
-  };
-
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (!manufacture.trim()) return alert("Please enter a manufacturer");
-
-    updateSearchParams(model.toLowerCase(), manufacture.toLowerCase());
   };
 
   return (
     <form
+      className="flex items-center gap-2 max-sm:flex-col w-full relative max-w-3xl bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 p-2 border border-gray-200"
       onSubmit={handleSearch}
-      className="flex items-center justify-start max-sm:flex-col w-full relative gap-4 max-w-3xl bg-white rounded-full shadow-sm hover:shadow-md transition-shadow duration-300 p-2 border border-gray-100"
     >
-      <div className="w-full flex-1 relative">
+      {/* Manufacturer Search */}
+      <div className="flex-1 max-sm:w-full flex items-center relative group">
         <SearchManufacture
-          manufacture={manufacture}
-          setManufacture={setManufacture}
+          manufacturer={manufacturer}
+          setManufacturer={setManufacturer}
         />
-        <SearchButton otherClasses="sm:hidden" />
+        <Image
+          src="/car-logo.svg" // Consider using a car brand icon
+          width={24}
+          height={24}
+          className="absolute left-4 top-1/2 -translate-y-1/2 opacity-60 group-focus-within:opacity-100 transition-opacity"
+          alt="Manufacturer"
+          aria-hidden="true"
+        />
       </div>
 
-      <div className="searchbar__item relative w-full flex-1">
+      {/* Model Search */}
+      <div className="flex-1 max-sm:w-full flex items-center relative group">
         <Image
           src="/model-icon.png"
-          width={25}
-          height={25}
-          className="absolute w-[20px] h-[20px] ml-4 top-1/2 transform -translate-y-1/2"
-          alt="car model"
+          width={24}
+          height={24}
+          className="absolute left-4 top-1/2 -translate-y-1/2 opacity-60 group-focus-within:opacity-100 transition-opacity"
+          alt="Model"
+          aria-hidden="true"
         />
         <input
           type="text"
           name="model"
           value={model}
           onChange={(e) => setModel(e.target.value)}
-          placeholder="Tiguan"
-          className="searchbar__input pl-12" 
+          placeholder="Enter model (e.g. Tiguan)"
+          className="w-full h-12 pl-12 pr-6 bg-gray-50 rounded-full outline-none text-sm placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
         />
-        <SearchButton otherClasses="sm:hidden" />
       </div>
 
-      <SearchButton otherClasses="max-sm:hidden" />
-
+      {/* Search Button */}
       <button
         type="submit"
-        className="px-6 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:ring-offset-2 transition-all duration-200 active:scale-95 shadow-sm hover:shadow-blue-200/50 whitespace-nowrap cursor-pointer"
+        className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:ring-offset-2 transition-all duration-200 active:scale-95 whitespace-nowrap max-sm:w-full"
       >
-        Search
+        <Image
+          src="/magnifying-glass.svg"
+          width={20}
+          height={20}
+          className="filter-white"
+          alt="Search"
+          aria-hidden="true"
+        />
+        <span className="font-medium">Search</span>
       </button>
     </form>
   );

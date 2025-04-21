@@ -1,6 +1,5 @@
 import { CarProps } from "@/types";
 
-
 export async function fetchCars(make = "toyota", model = "camry") {
   const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla${make}&model=${model}`;
 
@@ -49,10 +48,37 @@ export const generateCarImageUrl = (car: CarProps, angle?: string) => {
   url.searchParams.append("zoomType", "fullscreen");
   url.searchParams.append("modelYear", `${year}`);
 
-  
   if (angle) {
     url.searchParams.append("angle", angle);
   }
 
   return url.toString();
+};
+
+export const updateSearchParams = (type: string, value: string) => {
+  // Get the current URL search params
+  const searchParams = new URLSearchParams(window.location.search);
+
+  // Set the specified search parameter to the given value
+  searchParams.set(type, value);
+
+  // Set the specified search parameter to the given value
+  const newPathname = `${window.location.pathname}?${searchParams.toString()}`;
+
+  return newPathname;
+};
+
+export const deleteSearchParams = (type: string) => {
+  // Set the specified search parameter to the given value
+  const newSearchParams = new URLSearchParams(window.location.search);
+
+  // Delete the specified search parameter
+  newSearchParams.delete(type.toLocaleLowerCase());
+
+  // Construct the updated URL pathname with the deleted search parameter
+  const newPathname = `${
+    window.location.pathname
+  }?${newSearchParams.toString()}`;
+
+  return newPathname;
 };
