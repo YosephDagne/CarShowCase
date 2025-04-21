@@ -2,9 +2,11 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { CarProps } from "@/types";
+
 import { calculateCarRent } from "@/utils";
+import { CarProps } from "@/types";
 import CustomButton from "./CustomButton";
+import CarDetails from "./CarDetails";
 
 interface CarCardProps {
   car: CarProps;
@@ -12,89 +14,89 @@ interface CarCardProps {
 
 const CarCard = ({ car }: CarCardProps) => {
   const { city_mpg, year, make, model, transmission, drive } = car;
+
   const [isOpen, setIsOpen] = useState(false);
 
   const carRent = calculateCarRent(city_mpg, year);
 
   return (
-    <article
-      className="flex flex-col p-5 bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 group"
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
-      aria-labelledby={`car-title-${make}-${model}`}
-    >
-      {/* Title */}
-      <header className="w-full flex justify-between items-start mb-4">
-        <h2
-          id={`car-title-${make}-${model}`}
-          className="text-xl font-bold text-gray-900 capitalize truncate"
-        >
+    <div className="flex flex-col p-6 justify-center items-start text-black-100 bg-primary-blue-100 rounded-3xl shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:bg-white hover:shadow-xl group">
+      <div className="w-full flex justify-between items-start gap-2">
+        <h2 className="text-[22px] leading-[26px] font-bold capitalize text-black">
           {make} {model}
         </h2>
-      </header>
-
-      {/* Price */}
-      <div className="mb-4">
-        <p className="text-3xl font-extrabold text-gray-800">
-          <span className="text-sm font-semibold align-top">$</span>
-          {carRent}
-          <span className="text-sm font-medium text-gray-500"> /day</span>
-        </p>
       </div>
 
-      {/* Car Image */}
-      <figure className="relative w-full h-40 mb-4 rounded-xl overflow-hidden">
+      <p className="flex mt-6 text-[32px] leading-[38px] font-extrabold text-black">
+        <span className="self-start text-[14px] leading-[17px] font-semibold text-gray-600">
+          $
+        </span>
+        {carRent}
+        <span className="self-end text-[14px] leading-[17px] font-medium text-gray-600">
+          /day
+        </span>
+      </p>
+
+      {/* Image section with hover zoom effect */}
+      <div className="relative w-full h-40 my-3 object-contain">
         <Image
           src="/hero.png"
-          alt={`${make} ${model}`}
-          fill
-          sizes="(max-width: 768px) 100vw, 50vw"
-          className="object-contain transition-transform duration-300 group-hover:scale-105"
-          priority
+          alt="hero"
+          width={300}
+          height={300}
+          className=""
         />
-      </figure>
-
-      {/* Car Specs */}
-      <div className="relative mt-2 grid grid-cols-3 text-gray-700">
-        {/* Transmission */}
-        <div className="flex flex-col items-center gap-2">
-          <Image
-            src="/steering-wheel.svg"
-            alt="Transmission"
-            width={24}
-            height={24}
-          />
-          <p className="text-sm">
-            {transmission === "a" ? "Automatic" : "Manual"}
-          </p>
-        </div>
-
-        {/* Drive */}
-        <div className="flex flex-col items-center gap-2">
-          <Image src="/tire.svg" alt="Drive" width={24} height={24} />
-          <p className="text-sm uppercase">{drive}</p>
-        </div>
-
-        {/* MPG */}
-        <div className="flex flex-col items-center gap-2">
-          <Image src="/gas.svg" alt="Fuel Efficiency" width={24} height={24} />
-          <p className="text-sm">{city_mpg} MPG</p>
-        </div>
-
-        {/* View More button on hover */}
-        {isOpen && (
-          <div className="absolute bottom-0 left-0 w-full z-10 px-2 pb-2">
-            <CustomButton
-              title="View More"
-              containerStyles="w-full py-3 rounded-full bg-blue-600 text-white text-sm"
-              handleClick={() => setIsOpen(true)}
-              rightIcon="/right-arrow.svg"
-              textStyles="text-[14px] leading-[17px] font-semibold text-white "
-            />
-          </div>
-        )}
       </div>
-    </article>
+
+      <div className="relative flex w-full mt-2">
+        <div className="flex group-hover:invisible w-full justify-between text-grey space-x-4">
+          {/* Steering Wheel */}
+          <div className="flex flex-col justify-center items-center gap-2">
+            <Image
+              src="/steering-wheel.svg"
+              width={20}
+              height={20}
+              alt="steering wheel"
+            />
+            <p className="text-[14px] leading-[17px] text-gray-600">
+              {transmission === "a" ? "Automatic" : "Manual"}
+            </p>
+          </div>
+
+          {/* Drive Type */}
+          <div className="flex flex-col justify-center items-center gap-2">
+            <Image src="/tire.svg" width={20} height={20} alt="drive type" />
+            <p className="text-[14px] leading-[17px] text-gray-600">
+              {drive.toUpperCase()}
+            </p>
+          </div>
+
+          {/* MPG */}
+          <div className="flex flex-col justify-center items-center gap-2">
+            <Image src="/gas.svg" width={20} height={20} alt="fuel" />
+            <p className="text-[14px] leading-[17px] text-gray-600">
+              {city_mpg} MPG
+            </p>
+          </div>
+        </div>
+
+        <div className="hidden group-hover:flex absolute bottom-0 w-full z-10">
+          <CustomButton
+            title="View More"
+            containerStyles="w-full py-[16px] rounded-full bg-blue-500 hover:bg-blue-600 transition-all duration-200 ease-in-out"
+            textStyles="text-white text-[14px] leading-[17px] font-bold"
+            rightIcon="/right-arrow.svg"
+            handleClick={() => setIsOpen(true)}
+          />
+        </div>
+      </div>
+
+      <CarDetails
+        isOpen={isOpen}
+        closeModal={() => setIsOpen(false)}
+        car={car}
+      />
+    </div>
   );
 };
 
