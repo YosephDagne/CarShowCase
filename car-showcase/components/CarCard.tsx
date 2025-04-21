@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-import { calculateCarRent } from "@/utils";
+import { calculateCarRent, generateCarImageUrl } from "@/utils";
 import { CarProps } from "@/types";
 import CustomButton from "./CustomButton";
 import CarDetails from "./CarDetails";
@@ -40,7 +40,7 @@ const CarCard = ({ car }: CarCardProps) => {
       {/* Image section with hover zoom effect */}
       <div className="relative w-full h-40 my-3 object-contain">
         <Image
-          src="/hero.png"
+          src={generateCarImageUrl(car)}
           alt="hero"
           width={300}
           height={300}
