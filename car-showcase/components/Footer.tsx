@@ -7,7 +7,7 @@ const Footer = () => {
   return (
     <footer className="w-full bg-gray-200 py-12 px-6 sm:px-12 lg:px-16">
       <div className="flex flex-col lg:flex-row justify-between gap-12">
-        {/* Logo Section */}
+      
         <div className="flex flex-col items-start gap-6 max-w-[300px]">
           <Image
             src="/logo.svg"
@@ -22,7 +22,7 @@ const Footer = () => {
           </p>
         </div>
 
-        {/* Links Grid */}
+     
         <div className="flex flex-col sm:flex-col md:flex-row lg:flex-row gap-4 sm:gap-8 md:gap-12">
           {footerLinks.map((link) => (
             <div key={link.title} className="flex flex-col gap-4">
@@ -46,7 +46,6 @@ const Footer = () => {
         </div>
       </div>
 
-      {/* Copyright and Policies */}
       <div className="border-t border-gray-300 mt-12 pt-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="order-2 md:order-1 text-center md:text-left">
