@@ -17,9 +17,9 @@ const NavBar = () => (
       </Link>
 
       <CustomButton
-        title="Sign in"
+        title="Sign In"
         btnType="button"
-        containerStyles="text-blue-300 rounded-full bg-white min-w-[130px]"
+        containerStyles="text-blue-600 rounded-full bg-white min-w-[130px] hover:bg-green-500 border-[1px] border-black hover:text-white"
       />
     </nav>
   </header>
