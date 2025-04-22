@@ -1,4 +1,3 @@
-
 import { MouseEventHandler } from "react";
 
 export interface CustomButtonProps {
@@ -24,7 +23,6 @@ export interface CarProps {
   transmission: string;
   year: number;
 }
-
 export interface FilterProps {
   manufacturer?: string;
   year?: number;
@@ -37,15 +35,15 @@ export interface HomeProps {
   searchParams: FilterProps;
 }
 
-// export interface CarCardProps {
-//   model: string;
-//   make: string;
-//   mpg: number;
-//   transmission: string;
-//   year: number;
-//   drive: string;
-//   cityMPG: number;
-// }
+export interface CarCardProps {
+  model: string;
+  make: string;
+  mpg: number;
+  transmission: string;
+  year: number;
+  drive: string;
+  cityMPG: number;
+}
 
 export interface OptionProps {
   title: string;

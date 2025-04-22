@@ -1,10 +1,12 @@
-import { CarProps } from "@/types";
+import { CarProps, FilterProps } from "@/types";
 
-export async function fetchCars(make = "toyota", model = "camry") {
-  const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla${make}&model=${model}`;
+export async function fetchCars(filters: FilterProps) {
+  const { manufacturer, year, fuel, limit, model } = filters;
+  const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla`;
 
   try {
     const res = await fetch(url, {
+      method: "GET",
       headers: {
         "x-rapidapi-key": "2928cc71d9mshd5b0f6b9ba6b2abp16b51cjsndfdddf781ad2",
         "x-rapidapi-host": "cars-by-api-ninjas.p.rapidapi.com",
@@ -82,3 +84,6 @@ export const deleteSearchParams = (type: string) => {
 
   return newPathname;
 };
+function getCarImage(imageSearchTerm: string) {
+  throw new Error("Function not implemented.");
+}

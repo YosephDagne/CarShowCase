@@ -36,7 +36,7 @@ const SearchBar = () => {
 
   return (
     <form
-      className="flex items-center gap-2 max-sm:flex-col w-full relative max-w-3xl bg-white rounded-full shadow-lg hover:shadow-xl transition-shadow duration-300 p-2 border border-gray-200"
+      className="flex items-center gap-2 max-sm:flex-col w-full relative max-w-3xl bg-white rounded-[10px] p-2 border border-gray-200"
       onSubmit={handleSearch}
     >
       {/* Manufacturer Search */}
@@ -78,7 +78,7 @@ const SearchBar = () => {
       {/* Search Button */}
       <button
         type="submit"
-        className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:ring-offset-2 transition-all duration-200 active:scale-95 whitespace-nowrap max-sm:w-full"
+        className="flex items-center justify-center gap-2 px-8 py-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-200 focus:ring-offset-2 transition-all duration-200 active:scale-95 whitespace-nowrap max-sm:w-full cursor-pointer"
       >
         <Image
           src="/magnifying-glass.svg"
@@ -88,7 +88,6 @@ const SearchBar = () => {
           alt="Search"
           aria-hidden="true"
         />
-        <span className="font-medium">Search</span>
       </button>
     </form>
   );

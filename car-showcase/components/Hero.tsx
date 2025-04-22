@@ -1,60 +1,46 @@
 "use client";
+
 import Image from "next/image";
-import CustomButton from "./CustomButton";
+
+import { CustomButton } from "@/components";
 
 const Hero = () => {
   const handleScroll = () => {
-    const section = document.getElementById("cars");
-    section?.scrollIntoView({ behavior: "smooth" });
+    const nextSection = document.getElementById("discover");
+
+    if (nextSection) {
+      nextSection.scrollIntoView({ behavior: "smooth" });
+    }
   };
 
   return (
-    <section className="relative z-0 w-full max-w-[1440px] mx-auto px-6 sm:px-16 py-20 flex flex-col-2 xl:flex-row items-center justify-between gap-14">
-      {/* Left Section */}
-      <div className="flex-1 xl:pt-24 text-left space-y-6 sm:space-y-8 xl:space-y-10">
-        <h1 className="text-[40px] sm:text-[60px] 2xl:text-[72px] font-extrabold leading-tight text-gray-700">
-          Find, book or rent a car <br className="hidden sm:inline" />
-          quickly and easily
+    <div className=" flex xl:flex-row flex-col gap-5 relative z-0 max-w-[1440px] mx-auto">
+      <div className="flex-1 pt-36 px-20">
+        <h1 className="xl:text-[42px] sm:text-[64px] text-[30px] font-extrabold">
+          Find, book, rent a car—quick and super easy!
         </h1>
 
-        <p className="text-base sm:text-lg text-gray-600 max-w-xl">
+        <p className="text-[20px] text-black-100 font-light mt-5">
           Streamline your car rental experience with our effortless booking
           process.
         </p>
 
         <CustomButton
           title="Explore Cars"
+          containerStyles="bg-blue-400 text-white rounded-full mt-10"
           handleClick={handleScroll}
-          containerStyles="bg-blue-600 text-white rounded-full py-3 px-3 hover:bg-gray-200 transition duration-300 ease-in-out hover:text-black border-[1px] border-black"
         />
       </div>
+      <div className=" xl:flex-[1.5] flex justify-end items-end w-full xl:h-screen">
+        <div className="relative xl:w-full w-[90%] xl:h-full h-[590px] z-0 animate-slide-in">
+          <Image src="/hero.png" alt="hero"
+          fill  className="object-contain " />
+        </div>
 
-      {/* Right Section */}
-      <div className="relative flex-1 w-full flex justify-center items-end min-h-[300px] sm:min-h-[4 00px] xl:min-h-[500px]">
-        {/* Background Shape */}
-        <div
-          className="absolute xl:top-[-200px] top-[-80px] xl:left-0 xl:w-screen xl:h-[700px] w-[150%] h-[120%] sm:w-full sm:h-full -z-10  xl:rounded-none"
-          style={{
-            backgroundImage: "url('/hero-bg.png')",
-            backgroundSize: "cover",
-            backgroundRepeat: "no-repeat",
-            backgroundPosition: "center",
-            transform: "translateX(15%)",
-            borderRadius: "20px"
-          }}
-        />
-
-        {/* Hero Image */}
-        <Image
-          src="/hero.png"
-          alt="Car Rental Hero"
-          width={500}
-          height={500}
-          className="w-auto h-[250px] sm:h-[400px] xl:h-[500px] object-contain z-10 animate-slide-in"
-          priority
-        />
+    <div className="hero__image-overlay" />
+       
       </div>
-    </section>
+    </div>
   );
 };
 

@@ -1,10 +1,17 @@
 import { Hero, CarCard, SearchBar, CustomFilter } from "@/components";
 import { fetchCars } from "@/utils";
+import { HomeProps } from "@/types";
 
-export default async function Home() {
+export default async function Home({ searchParams } : HomeProps) {
   // Fetch car data
-  const allCars = await fetchCars();
-
+  const allCars = await fetchCars({
+    manufacturer: searchParams.manufacturer,
+    year: searchParams.year || 2022,
+    fuel: searchParams.fuel || "",
+    limit: searchParams.limit || 10,
+    model: searchParams.model || "",
+  });
+// Log fetched car data for debugging
   // Check if data is empty or invalid
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
