@@ -7,7 +7,7 @@ import ShowMore from "@/components/ShowMore";
 export default async function Home({ searchParams }: HomeProps) {
   // Fetch car data
   const allCars = await fetchCars({
-    pageNumber: 1,
+   
     manufacturer: searchParams.manufacturer || "",
     year: searchParams.year || 2022,
     fuel: searchParams.fuel || "",

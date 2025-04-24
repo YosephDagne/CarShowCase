@@ -24,13 +24,13 @@ export interface CarProps {
   year: number;
 }
 export interface FilterProps {
-  pageNumber: number;
   manufacturer?: string;
   year?: number;
   model?: string;
   limit?: number;
   fuel?: string;
 }
+
 
 export interface HomeProps {
   searchParams: FilterProps;
