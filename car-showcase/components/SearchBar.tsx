@@ -3,36 +3,24 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import SearchManufacture from "./SearchManufacture";
+import SearchManufacturer from "./SearchManufacture";
 
-const SearchBar = () => {
-  const [manufacturer, setManufacturer] = useState("");
-  const [model, setModel] = useState("");
-  const router = useRouter();
+const SearchBar = ({ setManufacturer, setModel }) => {
+   const [searchManufacturer, setSearchManufacturer] = useState("");
+   const [searchModel, setSearchModel] = useState("");
+   const router = useRouter();
+ 
+    
+   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+     e.preventDefault();
 
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+     if (searchManufacturer === "" && searchModel === "") {
+       return alert("Please fill in the search bar");
+     }
 
-    if (manufacturer.trim() === "" && model.trim() === "") {
-      return alert("Please provide some input");
-    }
-
-    updateSearchParams(model.toLowerCase(), manufacturer.toLowerCase());
-  };
-
-  const updateSearchParams = (model: string, manufacturer: string) => {
-    const searchParams = new URLSearchParams(window.location.search);
-
-    model ? searchParams.set("model", model) : searchParams.delete("model");
-    manufacturer
-      ? searchParams.set("manufacturer", manufacturer)
-      : searchParams.delete("manufacturer");
-
-    const newPathname = `${
-      window.location.pathname
-    }?${searchParams.toString()}`;
-    router.push(newPathname);
-  };
+     setModel(searchModel);
+     setManufacturer(searchManufacturer);
+   };
 
   return (
     <form
@@ -41,9 +29,9 @@ const SearchBar = () => {
     >
       {/* Manufacturer Search */}
       <div className="flex-1 max-sm:w-full flex items-center relative group">
-        <SearchManufacture
-          manufacturer={manufacturer}
-          setManufacturer={setManufacturer}
+        <SearchManufacturer
+          selected={searchManufacturer}
+          setSelected={setSearchManufacturer}
         />
         <Image
           src="/car-logo.svg" // Consider using a car brand icon
@@ -68,8 +56,8 @@ const SearchBar = () => {
         <input
           type="text"
           name="model"
-          value={model}
-          onChange={(e) => setModel(e.target.value)}
+          value={searchModel}
+          onChange={(e) => setSearchModel(e.target.value)}
           placeholder="Enter model (e.g. Tiguan)"
           className="w-full h-12 pl-12 pr-6 bg-gray-50 rounded-full outline-none text-sm placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all"
         />
