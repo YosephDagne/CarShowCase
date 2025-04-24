@@ -2,18 +2,19 @@ import { Hero, CarCard, SearchBar, CustomFilter } from "@/components";
 import { fetchCars } from "@/utils";
 import { HomeProps } from "@/types";
 import { fuels, yearsOfProduction } from "@/constants";
+import ShowMore from "@/components/ShowMore";
 
-export default async function Home({ searchParams } : HomeProps) {
+export default async function Home({ searchParams }: HomeProps) {
   // Fetch car data
   const allCars = await fetchCars({
-    manufacturer: searchParams.manufacturer,
+    pageNumber: 1,
+    manufacturer: searchParams.manufacturer || "",
     year: searchParams.year || 2022,
     fuel: searchParams.fuel || "",
     limit: searchParams.limit || 10,
     model: searchParams.model || "",
   });
-// Log fetched car data for debugging
-  // Check if data is empty or invalid
+
   const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1 || !allCars;
 
   return (
@@ -29,8 +30,8 @@ export default async function Home({ searchParams } : HomeProps) {
         <div className=" mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar />
           <div className="flex justify-start flex-wrap items-center gap-2 mt-6">
-            <CustomFilter title="fuel" options={fuels } />
-            <CustomFilter title = "year" options ={yearsOfProduction} />
+            <CustomFilter title="fuel" options={fuels} />
+            <CustomFilter title="year" options={yearsOfProduction} />
           </div>
         </div>
 
@@ -42,6 +43,10 @@ export default async function Home({ searchParams } : HomeProps) {
                 <CarCard key={`${car.make}-${car.model}-${index}`} car={car} />
               ))}
             </div>
+            <ShowMore
+              pageNumber={(searchParams.limit || 10) / 10}
+              isNext={(searchParams.limit || 10) > allCars.length}
+            />
           </section>
         ) : (
           // Show "No results" message if data is empty

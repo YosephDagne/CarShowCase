@@ -24,6 +24,7 @@ export interface CarProps {
   year: number;
 }
 export interface FilterProps {
+  pageNumber: number;
   manufacturer?: string;
   year?: number;
   model?: string;

@@ -2,7 +2,7 @@ import { CarProps, FilterProps } from "@/types";
 
 export async function fetchCars(filters: FilterProps) {
   const { manufacturer, year, fuel, limit, model } = filters;
-  const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla`;
+  const url = `https://cars-by-api-ninjas.p.rapidapi.com/v1/cars?model=corolla `;
 
   try {
     const res = await fetch(url, {
@@ -24,6 +24,9 @@ export async function fetchCars(filters: FilterProps) {
     return [];
   }
 }
+
+
+
 
 export function calculateCarRent(city_mpg: number, year: number) {
   const basePricePerDay = 50;
