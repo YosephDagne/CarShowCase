@@ -1,15 +1,16 @@
 "use client";
 
+import { useState, Fragment } from "react";
 import Image from "next/image";
-import { Fragment, useState } from "react";
 import { Combobox, Transition } from "@headlessui/react";
 
 import { manufacturers } from "@/constants";
-import { SearchManuFacturerProps } from "@/types";
+import { SearchManufacturerProps } from "@/types";
 
 const SearchManufacturer = ({
-  selected , setSelected
-}: SearchManuFacturerProps) => {
+  selected,
+  setSelected,
+}: SearchManufacturerProps) => {
   const [query, setQuery] = useState("");
 
   const filteredManufacturers =
@@ -23,29 +24,29 @@ const SearchManufacturer = ({
         );
 
   return (
-    <div className="flex-1 max-sm:w-full flex justify-start items-center">
+    <div className="flex-1 max-sm:w-full flex justify-start items-center relative">
       <Combobox value={selected} onChange={setSelected}>
         <div className="relative w-full">
-          {/* Icon inside input */}
-          <Combobox.Button className="absolute top-[14px] left-1">
+          {/* Car Logo Icon */}
+          <Combobox.Button className="absolute top-1/2 transform -translate-y-1/2 left-4">
             <Image
               src="/car-logo.svg"
-              alt="car logo"
               width={20}
               height={20}
-              className="ml-4 cursor-pointer"
+              className="object-contain"
+              alt="Car Logo"
             />
           </Combobox.Button>
 
-          {/* Input field */}
+          {/* Input Field for Search */}
           <Combobox.Input
-            placeholder="Volkswagen..."
-            className="w-full h-[48px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-white outline-none cursor-pointer text-sm border-[ 1px] border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            displayValue={(item: string) => item}
+            className="w-full h-[48px] pl-12 p-4 rounded-l-full max-sm:rounded-full bg-white border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:outline-none cursor-pointer text-sm"
+            placeholder="Volkswagen"
+            displayValue={(manufacturer: string) => manufacturer}
             onChange={(e) => setQuery(e.target.value)}
           />
 
-          {/* Dropdown options */}
+          {/* Dropdown for Suggestions */}
           <Transition
             as={Fragment}
             leave="transition ease-in duration-100"
@@ -53,34 +54,23 @@ const SearchManufacturer = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery("")}
           >
-            <Combobox.Options className="absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
+            <Combobox.Options className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-10">
               {filteredManufacturers.length === 0 && query !== "" ? (
-                <Combobox.Option
-                  value={query}
-                  className="cursor-default select-none relative py-2 pl-10 pr-4 text-gray-700"
-                >
-                  Create "{query}"
-                </Combobox.Option>
+                <div className="py-2 text-center text-gray-500">
+                  No results found
+                </div>
               ) : (
                 filteredManufacturers.map((item) => (
                   <Combobox.Option
                     key={item}
-                    value={item}
                     className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                        active ? "bg-blue-500 text-white" : "text-gray-900"
+                      `cursor-pointer select-none relative py-2 pl-10 pr-4 ${
+                        active ? "bg-blue-600 text-white" : "text-gray-900"
                       }`
                     }
+                    value={item}
                   >
-                    {({ selected }) => (
-                      <span
-                        className={`block truncate ${
-                          selected ? "font-medium" : "font-normal"
-                        }`}
-                      >
-                        {item}
-                      </span>
-                    )}
+                    {item}
                   </Combobox.Option>
                 ))
               )}

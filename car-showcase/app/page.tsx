@@ -1,52 +1,69 @@
 "use client";
-import { useState, useEffect } from "react";
 
-import { Hero, CarCard, SearchBar, CustomFilter } from "@/components";
+import { useEffect, useState } from "react";
+import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
 import { fetchCars } from "@/utils";
 import { fuels, yearsOfProduction } from "@/constants";
-import ShowMore from "@/components/ShowMore";
 import Image from "next/image";
 
+// Assuming you have a Car type defined somewhere in your types file
+type Car = {
+  id: string;
+  make: string;
+  model: string;
+  year: number;
+  fuel: string;
+  // Include other car properties as necessary
+};
+
 export default function Home() {
-  const [allCars, setAllCars] = useState([]);
+  const [allCars, setAllCars] = useState<Car[]>([]);
   const [loading, setLoading] = useState(false);
 
-  // Search/filter states
+  // search states
   const [manufacturer, setManufacturer] = useState("");
   const [model, setModel] = useState("");
-  const [year, setYear] = useState(2022);
+
+  // filter states
   const [fuel, setFuel] = useState("");
+  const [year, setYear] = useState(2022);
+
+  // pagination states
   const [limit, setLimit] = useState(10);
 
   const getCars = async () => {
     setLoading(true);
+
     try {
       const result = await fetchCars({
         manufacturer: manufacturer || "",
-        model: model || "",
         year: year || 2022,
         fuel: fuel || "",
         limit: limit || 10,
+        model: model || "",
       });
-      setAllCars(result);
+
+      // Check for results and set cars, default to empty if no result
+      setAllCars(result || []);
     } catch (error) {
-      console.log("Error fetching cars:", error);
+      console.log(error);
     } finally {
       setLoading(false);
     }
   };
 
   useEffect(() => {
+    console.log(fuel, year, limit, manufacturer, model);
     getCars();
-  }, [manufacturer, model, year, fuel, limit]);
+  }, [fuel, year, limit, manufacturer, model]);
 
-  const isDataEmpty = !Array.isArray(allCars) || allCars.length < 1;
+  const isDataEmpty = !Array.isArray(allCars) || allCars.length === 0;
 
   return (
     <main className="overflow-hidden">
       <Hero />
 
-      <div className="mt-12 padding-x padding-y max-width ml-10" id="discover">
+      <div className="mt-12 pl-20 max-width" id="discover">
         <div className="flex flex-col items-start justify-start gap-y-2.5 text-black-100">
           <h1 className="text-4xl font-extrabold">Car Catalogue</h1>
           <p>Explore the cars you might like</p>
@@ -54,46 +71,48 @@ export default function Home() {
 
         <div className="mt-12 w-full flex-between items-center flex-wrap gap-5">
           <SearchBar setManufacturer={setManufacturer} setModel={setModel} />
-          <div className="flex justify-start flex-wrap items-center gap-2 mt-6">
+
+          <div className="flex justify-start flex-wrap items-center gap-2">
             <CustomFilter title="fuel" options={fuels} setFilter={setFuel} />
             <CustomFilter
               title="year"
               options={yearsOfProduction}
-              setYear={setYear}
+              setFilter={setYear}
             />
           </div>
         </div>
 
-        {allCars.length > 0 ? (
-          <section className="pt-14">
-            <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8">
-              {allCars.map((car, index) => (
-                <CarCard key={`${car.make}${car.model}${index}`} car={car} />
+        {isDataEmpty ? (
+          <div className="mt-16 flex justify-center items-center flex-col gap-2">
+            <h2 className="text-black text-xl font-bold">Oops, no results</h2>
+            <p>No cars match your criteria.</p>
+          </div>
+        ) : (
+          <section>
+            <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14">
+              {allCars.map((car) => (
+                <CarCard key={car.id} car={car} />
               ))}
             </div>
+
             {loading && (
-              <div className="w-full flex-center mt-16">
+              <div className="mt-16 w-full flex-center">
                 <Image
                   src="/loader.svg"
                   alt="loader"
+                  width={50}
+                  height={50}
                   className="object-contain"
                 />
               </div>
             )}
 
             <ShowMore
-              pageNumber={limit/ 10}
-              isNext={limit > allCars.length}
+              pageNumber={limit / 10}
+              isNext={allCars.length >= limit}
               setLimit={setLimit}
             />
           </section>
-        ) : (
-          <div className="mt-16 flex justify-center items-center flex-col gap-2">
-            <h2 className="text-black text-xl font-bold">Oops, no results</h2>
-            <p className="text-sm text-gray-600">
-              No cars were found based on your search.
-            </p>
-          </div>
         )}
       </div>
     </main>

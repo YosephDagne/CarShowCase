@@ -6,7 +6,7 @@ import Image from "next/image";
 import { calculateCarRent, generateCarImageUrl } from "@/utils";
 import { CarProps } from "@/types";
 import CustomButton from "./CustomButton";
-import CarDetails from "./CarDetails";
+import CarDetails from "@/components/CarDetails";
 
 interface CarCardProps {
   car: CarProps;
@@ -42,8 +42,7 @@ const CarCard = ({ car }: CarCardProps) => {
         <Image
           src={generateCarImageUrl(car)}
           alt="hero"
-          width={300}
-          height={300}
+          fill
           className=""
         />
       </div>
