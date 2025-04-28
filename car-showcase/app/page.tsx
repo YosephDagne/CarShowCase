@@ -4,17 +4,7 @@ import { useEffect, useState } from "react";
 import { CarCard, CustomFilter, Hero, SearchBar, ShowMore } from "@/components";
 import { fetchCars } from "@/utils";
 import { fuels, yearsOfProduction } from "@/constants";
-import Image from "next/image";
 
-// Assuming you have a Car type defined somewhere in your types file
-type Car = {
-  id: string;
-  make: string;
-  model: string;
-  year: number;
-  fuel: string;
-  // Include other car properties as necessary
-};
 
 export default function Home() {
   const [allCars, setAllCars] = useState<Car[]>([]);
@@ -53,7 +43,6 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log(fuel, year, limit, manufacturer, model);
     getCars();
   }, [fuel, year, limit, manufacturer, model]);
 
@@ -91,22 +80,9 @@ export default function Home() {
           <section>
             <div className="grid 2xl:grid-cols-4 xl:grid-cols-3 md:grid-cols-2 grid-cols-1 w-full gap-8 pt-14">
               {allCars.map((car) => (
-                <CarCard key={car.id} car={car} />
+                <CarCard  car={car} />
               ))}
             </div>
-
-            {loading && (
-              <div className="mt-16 w-full flex-center">
-                <Image
-                  src="/loader.svg"
-                  alt="loader"
-                  width={50}
-                  height={50}
-                  className="object-contain"
-                />
-              </div>
-            )}
-
             <ShowMore
               pageNumber={limit / 10}
               isNext={allCars.length >= limit}

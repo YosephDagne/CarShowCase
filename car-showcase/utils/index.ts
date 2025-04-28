@@ -23,9 +23,6 @@ export async function fetchCars(filters: FilterProps) {
   return result;
 }
 
-
-
-
 export function calculateCarRent(city_mpg: number, year: number) {
   const basePricePerDay = 50;
   const mileageFactor = 0.1;

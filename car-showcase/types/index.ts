@@ -13,6 +13,7 @@ export interface CustomButtonProps {
 export interface SearchManufacturerProps {
   manufacturer: string;
   setManufacturer: (manufacturer: string) => void;
+  
 }
 
 export interface CarProps {
@@ -46,7 +47,7 @@ export interface OptionProps {
 export interface CustomFilterProps {
   title: string;
   options: OptionProps[];
-  
+  setFilter: React.Dispatch<React.SetStateAction<string>>;
 }
 
 export interface ShowMoreProps {
